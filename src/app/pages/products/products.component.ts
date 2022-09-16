@@ -18,4 +18,8 @@ export class ProductsComponent implements OnInit {
       .pipe(tap((productList: Product[]) => (this.products = productList)))
       .subscribe();
   }
+
+  addToCart(product: Product): void {
+    console.log(product);
+  }
 }
