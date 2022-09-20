@@ -1,4 +1,7 @@
+import { Store } from './../../shared/interfaces/stores.interface';
+import { DataService } from './../../shared/services/data.service';
 import { Component, OnInit } from '@angular/core';
+import { tap } from 'rxjs';
 
 @Component({
   selector: 'app-checkout',
@@ -13,27 +16,25 @@ export class CheckoutComponent implements OnInit {
     city: '',
   };
 
-  stores = [
-    {
-      id: 1,
-      name: 'Park Row at Beekman St',
-      address: '38 Park Row',
-      city: 'New York',
-      openingHours: '10:00 - 14:00 and 17:00 - 20:30',
-    },
-    {
-      id: 2,
-      name: 'Store Alcalá',
-      address: 'Calle de Alcalá, 21',
-      city: 'Madrid',
-      openingHours: '10:00 - 14:00 and 17:00 - 20:30',
-    },
-  ];
-  constructor() {}
+  stores: Store[] = [];
+  constructor(private dataSvc: DataService) {}
 
-  ngOnInit(): void {}
+  ngOnInit(): void {
+    this.getStores();
+  }
 
   onPickupOrDelivery(value: boolean): void {
     console.log(value);
+  }
+
+  onSubmit() {
+    console.log('Submited');
+  }
+
+  getStores(): void {
+    this.dataSvc
+      .getStores()
+      .pipe(tap((res: Store[]) => (this.stores = res)))
+      .subscribe();
   }
 }
