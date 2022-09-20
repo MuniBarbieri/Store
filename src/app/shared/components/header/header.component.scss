@@ -1,3 +1,14 @@
 .spacer {
-  flex: 1 1 auto
+  flex: 1 1 auto;
+}
+
+a {
+  text-decoration: none;
+  color: white;
+}
+
+.mouseHover:hover {
+  color: aqua;
+  cursor: pointer;
+  transition: all 0.3s ease-in-out;
 }
